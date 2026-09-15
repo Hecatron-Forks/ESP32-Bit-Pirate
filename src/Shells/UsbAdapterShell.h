@@ -32,6 +32,7 @@ private:
     void rebootIntoAdapter(const char* title,
                            const char* description,
                            const char* example,
+                           const char* webTool = nullptr,
                            const char* returnInstruction = "Reset or press a device button to return to normal mode.");
 
     ITerminalView& terminalView;

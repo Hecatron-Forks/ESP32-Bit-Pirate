@@ -26,6 +26,7 @@
 #include "../src/Services/UartSnifferService.cpp"
 #include "../src/Selectors/HorizontalSelector.cpp"
 #include "../src/Shells/HelpShell.cpp"
+#include "../src/Shells/SpiFlashShell.cpp"
 #include "../src/Shells/MouseShell.cpp"
 #include "../src/Abstracts/ANetworkController.cpp"
 #include "../src/Controllers/CanController.cpp"
@@ -95,6 +96,7 @@
 #include "Controllers/test_HdUartController.cpp"
 #include "Controllers/test_ExpanderController.cpp"
 #include "Controllers/test_SpiController.cpp"
+#include "Shells/test_SpiFlashShell.cpp"
 #include "Controllers/test_I2cController.cpp"
 #include "Controllers/test_OneWireController.cpp"
 #include "Controllers/test_TwoWireController.cpp"
@@ -158,6 +160,7 @@ int main(int, char**) {
     runHdUartControllerTests();
     runExpanderControllerTests();
     runSpiControllerTests();
+    runSpiFlashShellTests();
     runI2cControllerTests();
     runOneWireControllerTests();
     runTwoWireControllerTests();

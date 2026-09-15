@@ -52,8 +52,8 @@ public:
     void saveOneShotUsbUartBridgeConfig(uint8_t rxPin, uint8_t txPin, bool inverted);
     void getOneShotUsbUartBridgeConfig(uint8_t defaultRxPin, uint8_t defaultTxPin, bool defaultInverted, uint8_t& rxPin, uint8_t& txPin, bool& inverted);
     void clearOneShotUsbUartBridgeConfig();
-    void saveOneShotFlashromSerprogConfig(uint8_t csPin, uint8_t sckPin, uint8_t misoPin, uint8_t mosiPin, uint32_t frequency);
-    void getOneShotFlashromSerprogConfig(uint8_t defaultCsPin, uint8_t defaultSckPin, uint8_t defaultMisoPin, uint8_t defaultMosiPin, uint32_t defaultFrequency, uint8_t& csPin, uint8_t& sckPin, uint8_t& misoPin, uint8_t& mosiPin, uint32_t& frequency);
+    void saveOneShotFlashromSerprogConfig(uint8_t csPin, uint8_t sckPin, uint8_t misoPin, uint8_t mosiPin, uint32_t frequency, int8_t wpPin = -1, int8_t holdPin = -1);
+    void getOneShotFlashromSerprogConfig(uint8_t defaultCsPin, uint8_t defaultSckPin, uint8_t defaultMisoPin, uint8_t defaultMosiPin, uint32_t defaultFrequency, uint8_t& csPin, uint8_t& sckPin, uint8_t& misoPin, uint8_t& mosiPin, uint32_t& frequency, int8_t& wpPin, int8_t& holdPin);
     void clearOneShotFlashromSerprogConfig();
     void saveOneShotSumpLogicAnalyzerConfig(const uint8_t* pins, uint8_t channelCount);
     void getOneShotSumpLogicAnalyzerConfig(uint8_t* pins, uint8_t defaultChannelCount, uint8_t& channelCount);

@@ -86,20 +86,24 @@ void NvsService::clearOneShotUsbUartBridgeConfig() {
     preferences.remove("uart_inv");
 }
 
-void NvsService::saveOneShotFlashromSerprogConfig(uint8_t csPin, uint8_t sckPin, uint8_t misoPin, uint8_t mosiPin, uint32_t frequency) {
+void NvsService::saveOneShotFlashromSerprogConfig(uint8_t csPin, uint8_t sckPin, uint8_t misoPin, uint8_t mosiPin, uint32_t frequency, int8_t wpPin, int8_t holdPin) {
     preferences.putUChar("oneshot_fr_cs", csPin);
     preferences.putUChar("oneshot_fr_sck", sckPin);
     preferences.putUChar("oneshot_fr_miso", misoPin);
     preferences.putUChar("oneshot_fr_mosi", mosiPin);
     preferences.putUInt("oneshot_fr_freq", frequency);
+    preferences.putChar("oneshot_fr_wp", wpPin);
+    preferences.putChar("oneshot_fr_hold", holdPin);
 }
 
-void NvsService::getOneShotFlashromSerprogConfig(uint8_t defaultCsPin, uint8_t defaultSckPin, uint8_t defaultMisoPin, uint8_t defaultMosiPin, uint32_t defaultFrequency, uint8_t& csPin, uint8_t& sckPin, uint8_t& misoPin, uint8_t& mosiPin, uint32_t& frequency) {
+void NvsService::getOneShotFlashromSerprogConfig(uint8_t defaultCsPin, uint8_t defaultSckPin, uint8_t defaultMisoPin, uint8_t defaultMosiPin, uint32_t defaultFrequency, uint8_t& csPin, uint8_t& sckPin, uint8_t& misoPin, uint8_t& mosiPin, uint32_t& frequency, int8_t& wpPin, int8_t& holdPin) {
     csPin = preferences.getUChar("oneshot_fr_cs", defaultCsPin);
     sckPin = preferences.getUChar("oneshot_fr_sck", defaultSckPin);
     misoPin = preferences.getUChar("oneshot_fr_miso", defaultMisoPin);
     mosiPin = preferences.getUChar("oneshot_fr_mosi", defaultMosiPin);
     frequency = preferences.getUInt("oneshot_fr_freq", defaultFrequency);
+    wpPin = preferences.getChar("oneshot_fr_wp", -1);
+    holdPin = preferences.getChar("oneshot_fr_hold", -1);
 }
 
 void NvsService::clearOneShotFlashromSerprogConfig() {
@@ -108,6 +112,8 @@ void NvsService::clearOneShotFlashromSerprogConfig() {
     preferences.remove("oneshot_fr_miso");
     preferences.remove("oneshot_fr_mosi");
     preferences.remove("oneshot_fr_freq");
+    preferences.remove("oneshot_fr_wp");
+    preferences.remove("oneshot_fr_hold");
 }
 
 void NvsService::saveOneShotSumpLogicAnalyzerConfig(const uint8_t* pins, uint8_t channelCount) {

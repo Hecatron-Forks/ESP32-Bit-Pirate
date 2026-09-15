@@ -123,7 +123,9 @@ bool BootModeConfigurator::configure() {
             flashromSerprogConfig.sckPin,
             flashromSerprogConfig.misoPin,
             flashromSerprogConfig.mosiPin,
-            flashromSerprogConfig.frequency
+            flashromSerprogConfig.frequency,
+            flashromSerprogConfig.wpPin,
+            flashromSerprogConfig.holdPin
         );
         nvsService.clearOneShotFlashromSerprogConfig();
     }
@@ -278,18 +280,20 @@ void BootModeConfigurator::showOneShotBootMode(OneShotBootMode mode,
             );
             break;
 
-        case OneShotBootMode::FlashromSerprog:
-            deviceView.adapterMode(
-                "Flashrom SPI",
-                "serprog SPI programmer",
-                {
-                    "CS GPIO " + std::to_string(flashromSerprogConfig.csPin),
-                    "SCK GPIO " + std::to_string(flashromSerprogConfig.sckPin),
-                    "MISO GPIO " + std::to_string(flashromSerprogConfig.misoPin),
-                    "MOSI GPIO " + std::to_string(flashromSerprogConfig.mosiPin)
-                }
-            );
+        case OneShotBootMode::FlashromSerprog: {
+            std::vector<std::string> details = {
+                "CS GPIO " + std::to_string(flashromSerprogConfig.csPin),
+                "SCK GPIO " + std::to_string(flashromSerprogConfig.sckPin),
+                "MISO GPIO " + std::to_string(flashromSerprogConfig.misoPin),
+                "MOSI GPIO " + std::to_string(flashromSerprogConfig.mosiPin)
+            };
+            if (flashromSerprogConfig.wpPin >= 0)
+                details.push_back("WP GPIO " + std::to_string(flashromSerprogConfig.wpPin));
+            if (flashromSerprogConfig.holdPin >= 0)
+                details.push_back("HOLD GPIO " + std::to_string(flashromSerprogConfig.holdPin));
+            deviceView.adapterMode("Flashrom SPI", "serprog SPI programmer", details);
             break;
+        }
 
         case OneShotBootMode::AvrDudeBusPirate:
             deviceView.adapterMode(
